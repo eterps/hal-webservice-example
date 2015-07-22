@@ -1,0 +1,8 @@
+{
+  "_links": {
+    "self": {"href": "https://api.artistry.net/"},
+    "artist": {"href": "https://api.artistry.net/artist/{name}"},
+    "artists": {"href": "https://api.artistry.net/artists"},
+    "album": {"href": "https://api.moosicstore.com/album/{name}"}
+  }
+}

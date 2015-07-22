@@ -3,21 +3,16 @@ require 'addressable/template'
 
 module URL
   def self.templates
-    {
-      self:    'https://api.artistry.net/',
-      artist:  'https://api.artistry.net/artist/{name}',
-      artists: 'https://api.artistry.net/artists',
-      album:   'https://api.moosicstore.com/album/{name}'
-    }
+    JSON(open('resources.json').read)['_links']
   end
 
   def self.for(label, params = {})
-    template = Addressable::Template.new(templates[label])
+    template = Addressable::Template.new(templates[label.to_s]['href'])
     template.expand params
   end
 
   def self.map(label)
-    pattern = templates[label].gsub(/\{([^}]+)\}/, ':\1')
+    pattern = templates[label.to_s]['href'].gsub(/\{([^}]+)\}/, ':\1')
     URI(pattern).path
   end
 end

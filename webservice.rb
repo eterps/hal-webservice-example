@@ -5,9 +5,7 @@ require_relative 'resources'
 class Webservice < Sinatra::Base
   get URL.map(:self) do # /
     content_type 'application/hal+json'
-    links = {}
-    URL.templates.each{|k, v| links[k] = {href: v}}
-    {_links: links}.to_json
+    open('resources.json').read
   end
 
   get URL.map(:artist) do # /artist/:name
